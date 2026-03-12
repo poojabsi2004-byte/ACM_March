@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+        <field name="name">New Vehicle Quotations</field>
+        <field name="path">sales</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'search_default_my_quotation': 1, 'default_vehicle_sales':True}</field>
+        <field name="domain">
+                [('vehicle_sales', '=', True)]
+        </field>
+        <field name="help" type="html">
+            <br/>
+            <h2>
+            Beat competitors with stunning quotations!
+            </h2><p>
+            Boost sales with online payments or signatures, upsells, and a great customer portal.
+            </p>
+            <a
+                role="button"
+                class="btn btn-secondary"
+                href="https://www.odoo.com/documentation/18.0/_downloads/312a470653db882b08ad72eb30cb4088/sample_quotation.pdf"
+                target="_blank"
+            >
+                Check a sample. It's clean!
+            </a>
+        </field>
+    </record>
+
+    <record id="action_after_sales_quotations" model="ir.actions.act_window">
+        <field name="name">After Sales Quotations</field>
+        <field name="path">after_sales_quotations</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="context">{'search_default_my_quotation': 1, 'default_after_sale':True}</field>
+        <field name="domain">
+                [('after_sale', '=', True)]
+        </field>
+        <field name="help" type="html">
+            <br/>
+            <h2>
+            Beat competitors with stunning quotations!
+            </h2><p>
+            Boost sales with online payments or signatures, upsells, and a great customer portal.
+            </p>
+            <a
+                role="button"
+                class="btn btn-secondary"
+                href="https://www.odoo.com/documentation/18.0/_downloads/312a470653db882b08ad72eb30cb4088/sample_quotation.pdf"
+                target="_blank"
+            >
+                Check a sample. It's clean!
+            </a>
+        </field>
+    </record>
+
+    <!-- [11-FEB-2026] Separate Sales Menu for Sales and After Sales -->
+
+    <record id="sale.action_orders" model="ir.actions.act_window">
+        <field name="name">Vehicle Sales Orders</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="context">{'default_vehicle_sales':True}</field>
+        <field name="path">sale_orders</field>
+        <field name="domain">
+                [('state', 'not in', ('draft', 'sent', 'cancel')),
+                ('vehicle_sales', '=', True)]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new quotation, the first step of a new sale!
+            </p><p>
+                Once the quotation is confirmed, it becomes a sales order.<br/> You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    <!-- [11-FEB-2026] Separate Sales Menu for Sales and After Sales -->
+    <record id="action_after_sales" model="ir.actions.act_window">
+        <field name="name">After Sales Order</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="context">{'default_after_sale':True}</field>
+        <field name="path">after_sales</field>
+        <field name="domain">
+                [('state', 'not in', ('draft', 'sent', 'cancel')),
+                ('after_sale', '=', True)]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new quotation, the first step of a new sale!
+            </p><p>
+                Once the quotation is confirmed, it becomes a sales order.<br/> You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    <!-- [11-FEB-2026] Separate Sales Menu for Sales and After Sales -->
+    <menuitem id="sale.menu_sale_order"
+                name="Vehicle Sales Orders"
+                action="sale.action_orders"
+                groups="sales_team.group_sale_salesman"
+                parent="sale.sale_order_menu"
+                sequence="20"/>
+
+    <!-- [11-FEB-2026] Separate Sales Menu for Sales and After Sales -->
+    <menuitem id="menu_after_sales"
+                name="After Sales Order"
+                action="action_after_sales"
+                groups="sales_team.group_sale_salesman"
+                parent="sale.sale_order_menu"
+                sequence="22"/>
+
+    <!-- [23-FEB-2026] Separate Quotations Menu for Sales and After Sales -->
+    <menuitem id="sale.menu_sale_quotations"
+                name="New Vehicle Quotations"
+                action="sale.action_quotations_with_onboarding"
+                groups="sales_team.group_sale_salesman"
+                parent="sale.sale_order_menu"
+                sequence="19"/>
+
+    <!-- [23-FEB-2026] Separate Quotations Menu for Sales and After Sales -->
+    <menuitem id="menu_after_sale_quotations"
+                name="After Sales Quotations"
+                action="action_after_sales_quotations"
+                groups="sales_team.group_sale_salesman"
+                parent="sale.sale_order_menu"
+                sequence="21"/>
+
+
+</odoo>

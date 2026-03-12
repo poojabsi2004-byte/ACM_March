@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "ACM Customisation",
+    "author": "Botspot Infoware Pvt. Ltd.",
+    "category": "ACM",
+    "summary": """ ACM""",
+    "website": "https://www.botspotinfoware.com",
+    "version": "18.0.1.0",
+    "description": """ """,
+    "depends": ['base', 'hr', 'sale_management', 'stock', 'tk_advance_vehicle_repair', 'product'],
+    "data": [
+        "security/ir_rule.xml",
+        "views/sale_order.xml",
+        "views/stock_move_view.xml",
+        "views/vehicle_model_view.xml",
+        "views/res_partner_view.xml",
+        "views/hr_employee_view.xml",
+        "views/product_template_view.xml",
+        "views/res_users_view.xml",
+        "views/hr_contract_view.xml",
+    ],
+    "license": "OPL-1",
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+}

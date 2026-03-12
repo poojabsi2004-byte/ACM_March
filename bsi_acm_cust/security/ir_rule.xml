@@ -1,0 +1,8 @@
+<odoo>
+    <record id="attachment_user_visibility_rule" model="ir.rule">
+        <field name="name">Attachment Visible Only Selected Users</field>
+        <field name="model_id" ref="base.model_ir_attachment"/>
+        <field name="domain_force"> ['|', ('allowed_user_ids','in',user.id), ('create_uid','=',user.id) ] </field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

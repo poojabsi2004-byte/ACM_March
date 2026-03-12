@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- [11-FEB-2026] TASK:Service (Procurement) -->
+<odoo>
+    <record id="stock_picking_inherit_view" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Unit Price before Demand -->
+            <xpath expr="//page[@name='operations']//field[@name='move_ids_without_package']//list//field[@name='product_uom_qty']"
+                   position="before">
+                <field name="price_unit"/>
+            </xpath>
+
+            <!-- Subtotal after UOM -->
+            <xpath expr="//page[@name='operations']//field[@name='move_ids_without_package']//list//field[@name='product_uom']"
+                   position="after">
+                <field name="price_subtotal"/>
+            </xpath>
+
+            <!-- Total -->
+            <xpath expr="//page[@name='operations']" position="inside">
+                <group class="oe_subtotal_footer">
+                    <field name="amount_total"/>
+                </group>
+            </xpath>
+
+
+            <!-- ===================== BUTTONS ABOVE STATUSBAR ===================== -->
+            <xpath expr="//sheet/div[@class='oe_title']" position="before">
+
+                <div class="mt16" invisible="picking_type_code != 'outgoing'">
+
+                    <!-- Chasis Arrival -->
+                    <button name="chasis_arrival"
+                            type="object"
+                            string="Chasis Arrival"
+                            class="btn-primary"
+                            confirm="Are you sure you want to move to Chasis Arrival stage?"
+                            invisible="delivery_stage or state not in ('waiting','confirmed','assigned')"/>
+
+                    <!-- Chasis Delivery -->
+                    <button name="chasis_delivery"
+                            type="object"
+                            string="Chasis Delivery"
+                            class="btn-primary"
+                            confirm="Are you sure you want to move to Chasis Delivery stage?"
+                            invisible="delivery_stage != 'chasis_arrival' or state not in ('waiting','confirmed','assigned')"/>
+
+                    <!-- EDRF -->
+                    <button name="edrf"
+                            type="object"
+                            string="EDRF"
+                            class="btn-primary"
+                            confirm="Are you sure you want to move to EDRF stage?"
+                            invisible="delivery_stage != 'chasis_delivery' or state not in ('waiting','confirmed','assigned')"/>
+
+                    <!-- PDI -->
+                    <button name="pdi"
+                            type="object"
+                            string="PDI"
+                            class="btn-primary"
+                            confirm="Are you sure you want to move to PDI stage?"
+                            invisible="delivery_stage != 'edrf' or state not in ('waiting','confirmed','assigned')"/>
+
+                    <!-- PUSPAKOM -->
+                    <button name="puspakom"
+                            type="object"
+                            string="PUSPAKOM"
+                            class="btn-primary"
+                            confirm="Are you sure you want to move to PUSPAKOM stage?"
+                            invisible="delivery_stage != 'pdi' or state not in ('waiting','confirmed','assigned')"/>
+
+                    <!-- Vehicle Registration -->
+                    <button name="vehicle_registration"
+                            type="object"
+                            string="Vehicle Registration"
+                            class="btn-primary"
+                            confirm="Are you sure you want to move to Vehicle Registration stage?"
+                            invisible="delivery_stage != 'puspakom' or state not in ('waiting','confirmed','assigned')"/>
+
+                    <!-- Delivered -->
+                    <button name="delivered"
+                            type="object"
+                            string="Delivered"
+                            class="btn-primary"
+                            confirm="Are you sure you want to mark this as Delivered?"
+                            invisible="delivery_stage != 'vehicle_registration' or state not in ('waiting','confirmed','assigned')"/>
+
+                </div>
+            </xpath>
+
+
+            <!-- ===================== STATUSBAR ===================== -->
+            <xpath expr="//sheet/div[@class='oe_title']" position="before">
+                <div class="mt16" invisible="picking_type_code != 'outgoing'">
+                    <field name="delivery_stage"
+                           widget="statusbar"
+                           statusbar_visible="chasis_arrival,chasis_delivery,edrf,pdi,puspakom,vehicle_registration,delivered"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

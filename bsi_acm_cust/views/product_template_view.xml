@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- [13-FEB-2026] TASK:Basic Additional Fields in Odoo from VMS Masters -->
+		<record id = "product_template_form_inherit" model="ir.ui.view">
+			<field name="name">product.template.form.inherit</field>
+			<field name="model">product.template</field>
+			<field name='inherit_id' ref="product.product_template_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='internal_notes']" position="before">
+					<group name="custome_field_vms">
+						<group>
+							<field name="model_id"/>
+						</group>
+					</group>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

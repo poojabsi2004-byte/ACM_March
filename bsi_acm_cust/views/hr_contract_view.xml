@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_inherit_view" model="ir.ui.view">
+        <field name="name">hr.contract.inherit.view</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr= "//field[@name='hr_responsible_id']" position="before">
+        		<field name = "bond_amount_paid"/>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

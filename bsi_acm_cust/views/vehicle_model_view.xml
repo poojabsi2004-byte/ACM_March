@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- [11-FEB-2026] Task:Service Department - Warranty Handling -->
+    <record id="vehicle_model_inherit_view" model="ir.ui.view">
+        <field name="name">vehicle.model.inherit.view</field>
+        <field name="model">vehicle.model</field>
+        <field name="inherit_id" ref="tk_advance_vehicle_repair.vehicle_model_form_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//form/sheet" position="inside">
+        		<group name="custome_field_vms">
+                    <field name = "warranty"/>
+                    <field name = "model_code"/>
+                    <field name = "description"/>
+	        		<field name = "chasis_number_prefix"/>
+	        	</group>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

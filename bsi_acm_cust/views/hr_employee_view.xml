@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- [13-FEB-2026] TASK:Basic Additional Fields in Odoo from VMS Masters -->
+		<record id ="hr_employee_form_view_inherit" model="ir.ui.view">
+			<field name="name">hr.employee.form.view.inherit</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//notebook" position="before">
+					<group name="custome_field_vms">
+						<group>
+							<field name="is_a_driver"/>
+							<field name="licence_type"/>
+							<field name="expiry_date"/>
+						</group>
+						<group>
+							<field name="trade_plate_no"/>
+							<field name="driver_code"/>
+							<field name="nric_number"/>
+						</group>
+					</group>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- [13-FEB-2026] TASK:Basic Additional Fields in Odoo from VMS Masters -->
+		<record id="res_partner_form_inherit" model="ir.ui.view">
+	        <field name="name">res.partner.form.inherit</field>
+	        <field name="model">res.partner</field>
+	        <field name="inherit_id" ref="base.view_partner_form"/>
+	        <field name="arch" type="xml">
+	        	<xpath expr="//sheet/group" position="after">
+	        		<group name="custome_field_vms">
+	        			<group>
+	        				<field name="family_size_adults"/>
+	        				<field name="childrens"/>
+	        				<field name="old_ic_no"/>
+	        				<field name="new_ic_no"/>
+	        				<field name="co_regn_no"/>
+	        				<field name="sp_disc_ex_stk"/>
+	        				<field name="spares_disc_indent"/>
+	        				<field name="ol_disc"/>
+	        				<field name="industry_id"/>
+	        			</group>
+	        			<group>
+	        				<field name="occupation"/>
+	        				<field name="msic_code"/>
+	        				<field name="vehicle_discount"/>
+	        				<field name="labour_discount"/>
+	        				<field name="it_no"/>
+	        				<field name="credit_period"/>
+	        				<field name="monthly_income"/>
+	        				
+	        			</group>
+	        		</group>
+	        		<group string="Manager">
+						<field name="manager_ids" widget="many2many_tags"/>
+						<field name="identity_cards"
+							widget="many2many_binary"
+							/>
+
+						<field name="driving_licenc"
+							widget="many2many_binary"
+							
+							/>
+					</group>
+				</xpath>
+	        </field>
+	    </record>
+	</data>
+</odoo>
