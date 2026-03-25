@@ -18,6 +18,8 @@
         "views/product_template_view.xml",
         "views/res_users_view.xml",
         "views/hr_contract_view.xml",
+        "views/hr_holidays.xml",
+        'views/account_payment.xml'
     ],
     "license": "OPL-1",
     "installable": True,
