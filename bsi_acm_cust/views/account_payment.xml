@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <!-- [pp:] - [24MAR-2026] [ADD] Displaying PO Number in Payment Records [START] -->
+    <record id="view_account_payment_list_inherit_refund" model="ir.ui.view">
+    <field name="name">account.payment.list.inherit.refund</field>
+    <field name="model">account.payment</field>
+    <field name="inherit_id" ref="account.view_account_payment_tree"/>
+    <field name="arch" type="xml">
+
+        <!-- Target payment_type field -->
+        <xpath expr="//field[@name='state']" position="after">
+            <field name="po_number" column_invisible="context.get('default_partner_type') == 'customer'"/>
+        </xpath>
+
+    </field>
+</record>
+
+<record id="view_account_payment_form_inherit_refund" model="ir.ui.view">
+    <field name="name">account.payment.form.inherit.refund</field>
+    <field name="model">account.payment</field>
+    <field name="inherit_id" ref="account.view_account_payment_form"/>
+    <field name="arch" type="xml">
+
+        <xpath expr="//field[@name='payment_type']" position="after">
+            <field name="po_number" column_invisible="1"/>
+        </xpath>
+
+
+    </field>
+</record>
+
+</odoo>

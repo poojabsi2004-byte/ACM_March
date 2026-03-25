@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- PP [13-March-2026] Description & Reason Required in Time Off & Add Field to Upload Document [START] -->
+		<record id ="hr_holidays_form_view_inherit" model="ir.ui.view">
+			<field name="name">hr.holidays.form.view.inherit</field>
+			<field name="model">hr.leave</field>
+			<field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='notes']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+			</field>
+		</record>
+        <!-- PP [13-March-2026] Description & Reason Required in Time Off & Add Field to Upload Document [END] -->
+
+
+        <!-- PP [13-March-2026] Document Requirement Based on Leave Type [START] -->
+        <record id="hr_holidays_edit_holiday_status_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr.holidays.edit.holidays.status.form.view.inherit</field>
+            <field name="model">hr.leave.type</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='support_document']" position="after">
+                    <field name="document_required"/>
+                </xpath>
+            </field>
+        </record>
+        <!-- PP [13-March-2026] Document Requirement Based on Leave Type [END] -->
+	</data>
+</odoo>
