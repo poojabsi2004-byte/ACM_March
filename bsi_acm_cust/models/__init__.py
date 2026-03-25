@@ -9,3 +9,9 @@ from . import product_template
 from . import res_users
 from . import hr_contract
 # from . import ir_attachment
+from . import hr_leave_type
+from . import hr_leave
+from . import hr_expense
+from . import account_payment
+
+
